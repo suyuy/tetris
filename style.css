@@ -1,0 +1,86 @@
+body { 
+  text-align: center; 
+  font-family: Arial, sans-serif; 
+  background-image: url('https://i.imgur.com/AKfi0mZ.jpeg');
+  background-repeat: repeat;
+  background-size: 25%;
+  margin: 0;
+  padding: 0;
+}
+
+canvas { 
+  background-color: black;
+  display: block; 
+  margin: 20px auto; 
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls .row {
+  margin: 5px;
+}
+
+.controls button {
+  background-color: #555; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  margin: 5px;
+  font-size: 16px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.controls button:active { background-color: #777; }
+
+/* h1の背景を白に変更 */
+h1 {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* ボタンの説明ボックスのスタイル */
+#infoBox {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  text-align: left;
+}
+
+#infoBox h2 {
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+#infoBox p {
+  margin: 10px 0;
+}
+
+#infoButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 60px;
+}
+
+#infoButton:active { background-color: #777; }
