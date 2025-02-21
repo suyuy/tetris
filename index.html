@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ぼくの考えたさいきょうのテトリス</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景音楽（自動再生・ループ） -->
+  <audio id="bgMusic" src="https://ia802905.us.archive.org/11/items/TetrisThemeMusic/Tetris.mp3" loop autoplay></audio>
+    
+  <h1>キングﾃﾄﾘｽ</h1>
+  
+  <!-- ボタンの説明を表示するボタン -->
+  <button id="infoButton" onclick="toggleInfo()">説明</button>
+  
+  <!-- 説明内容を表示する部分 -->
+  <div id="infoBox" class="info-box">
+    <h2>ボタンの説明</h2>
+    <p><strong>↻:</strong> ブロックを回転します。</p>
+    <p><strong>↓↓:</strong> ブロックを一気に落とします。</p>
+    <p><strong>←:</strong> ブロックを左に移動します。</p>
+    <p><strong>↓:</strong> ブロックを下に移動します。</p>
+    <p><strong>→:</strong> ブロックを右に移動します。</p>
+  </div>
+  
+  <canvas id="gameCanvas" width="200" height="400"></canvas>
+  
+  <div class="controls">
+    <div class="row">
+      <button onclick="rotatePiece()">↻</button>
+      <button onclick="hardDrop()">↓↓</button>
+    </div>
+    <div class="row">
+      <button onclick="moveLeft()">←</button>
+      <button onclick="moveDown()">↓</button>
+      <button onclick="moveRight()">→</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
