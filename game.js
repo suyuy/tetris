@@ -10,7 +10,29 @@ let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
 let currentPiece = getRandomPiece();
 let x = 3, y = 0;
 let gameOver = false;
-let gameInterval = setInterval(moveDown, 500); // ゲームループを管理
+let gameInterval = setInterval(moveDown, 500);  // ゲームループを管理
+
+function moveDown() {
+  if (gameOver) return; // ゲームオーバーなら何もしない
+
+  if (canMove(x, y + 1, currentPiece.shape)) {
+    y++;
+  } else {
+    mergePiece();
+    clearLines();
+    currentPiece = getRandomPiece();
+    x = 3;
+    y = 0;
+
+    if (!canMove(x, y, currentPiece.shape)) {
+      gameOver = true;
+      clearInterval(gameInterval); // ゲームループを停止
+      alert("ゲームオーバー！");
+      return;
+    }
+  }
+  drawBoard(board, currentPiece, x, y);
+}
 
 function getRandomPiece() {
   let id = Math.floor(Math.random() * SHAPES.length);
@@ -49,10 +71,7 @@ function clearLines() {
     }
   }
 }
-
 function moveDown() {
-  if (gameOver) return; // ゲームオーバーなら何もしない
-
   if (canMove(x, y + 1, currentPiece.shape)) {
     y++;
   } else {
@@ -61,23 +80,17 @@ function moveDown() {
     currentPiece = getRandomPiece();
     x = 3;
     y = 0;
-
     if (!canMove(x, y, currentPiece.shape)) {
       gameOver = true;
-      clearInterval(gameInterval); // ゲームループを停止
       alert("ゲームオーバー！");
-      return;
     }
   }
   drawBoard(board, currentPiece, x, y);
 }
 
-function moveLeft() { if (!gameOver && canMove(x - 1, y, currentPiece.shape)) x--; drawBoard(board, currentPiece, x, y); }
-function moveRight() { if (!gameOver && canMove(x + 1, y, currentPiece.shape)) x++; drawBoard(board, currentPiece, x, y); }
-function rotatePiece() { 
-  if (gameOver) return;
-  let rotated = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i])).reverse(); 
-  if (canMove(x, y, rotated)) currentPiece.shape = rotated; 
-  drawBoard(board, currentPiece, x, y); 
-}
-function hardDrop() { if (!gameOver) { while (canMove(x, y + 1, currentPiece.shape)) y++; moveDown(); }}
+function moveLeft() { if (canMove(x - 1, y, currentPiece.shape)) x--; drawBoard(board, currentPiece, x, y); }
+function moveRight() { if (canMove(x + 1, y, currentPiece.shape)) x++; drawBoard(board, currentPiece, x, y); }
+function rotatePiece() { let rotated = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i])).reverse(); if (canMove(x, y, rotated)) currentPiece.shape = rotated; drawBoard(board, currentPiece, x, y); }
+function hardDrop() { while (canMove(x, y + 1, currentPiece.shape)) y++; moveDown(); }
+
+setInterval(moveDown, 500);
